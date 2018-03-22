@@ -23,7 +23,7 @@ are required with the acceleration technique.</p>
 <b>Problem 3:</b>
 <div id="plot7" style="width:600px;height:250px;"> </div>
 <p>As long as the initial vector chosen is not a multiple of the eigenvector
-associated with lambda=1 (t(0, 0, 1) in this case),</br> mu will converge to 2 and in the same direction regardless of choice of x0.</p>
+associated with lambda=1 (t(0, 0, 1) in this case),</br> mu will converge to 2 and in the same direction(from below) regardless of choice of x0.</p>
 
 
 <script>
@@ -90,7 +90,7 @@ function calcMu (A){
 	}
 	document.getElementById('plot1').innerHTML += '<Br>Eigenvalue of A'+ A.length +': ' + Mu;
 	
-
+///////////////////////////////////////////////////////////////////A100 case
 	
 	if(A.length==100){
 	Plotly.plot( plot2, [{
@@ -137,13 +137,14 @@ function calcMu (A){
 	console.log(calcMu(initA(20)));
 	console.log(calcMu(initA(50)));
 	console.log(calcMu(initA(100)));
-	///////////////////////////////////////////////////////////////////// number 3
+	///////////////////////////////////////////////////////////////////// number 3 testing
 	var Mu=1;
 	var A = [[2,0,0],[0,2,0],[0,0,1]];
 	
 	//var x0 = [-10, -10, -10];
 	//var x0 = [99, -34, 1.34343];
-	var x0 = [9, 1993, 13];
+	//var x0 = [9, 1993, 13];
+	var x0 = [.0000045, .0002984, .02389676];
 	//var x0 = [0, 0, 1];
 	
 	var k = [];
@@ -151,7 +152,7 @@ function calcMu (A){
 	var MuTilde = [];
 	
 	
-	for (var i=0; i<1000; i++){
+	for (var i=0; i<50; i++){
 		
 		var xn = math.multiply(A, x0);
 		Mu = math.norm(xn)/math.norm(x0);
@@ -168,7 +169,7 @@ function calcMu (A){
 	x: k,
 	y: MusubK }], {
 	margin: { t: 0 } } );
-	console.log(Mu);
+	console.log(MusubK);
 	
 	
 </script>
