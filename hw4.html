@@ -1,0 +1,344 @@
+<head>
+               <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+			   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.2/math.js" type="text/javascript"></script>
+</head>
+
+<h2>Problem 1: </h2>
+<p>Explicit Euler method: </p>
+<p>Error on the right:  C~2.53, s~0.825</p>
+<div style = "width:1500px;height:250px;"> 
+	<div id="plot1" style="width:600px;height:250px;display: inline-block"></div>  
+	<div id="err1" style="width:600px;height:250px;display: inline-block"></div>
+</div>
+<p>Implicit Euler method: </p>
+<p>Error on the right:  C~5.08, s~1.1168</p>
+
+<div style = "width:1500px;height:250px;"> 
+	<div id="plot2" style="width:600px;height:250px;display: inline-block"></div>  
+	<div id="err2" style="width:600px;height:250px;display: inline-block"></div>
+</div>
+<p>Crank-Nicolson method: </p>
+<p>In this case, the C-N method was much more accurate than the others
+and didn't require very small time steps to be reasonably accurate.</p>
+<p>Error on the right:  C~0.312, s~2.007</p>
+
+<div style = "width:1500px;height:250px;"> 
+	<div id="plot3" style="width:600px;height:250px;display: inline-block"></div>  
+	<div id="err3" style="width:600px;height:250px;display: inline-block"></div>
+</div>
+
+<p>BDF-2: </p>
+<p>Error on the right:  C~0.945, s~1.91</p>
+<div style = "width:1500px;height:250px;"> 
+	<div id="plot4" style="width:600px;height:250px;display: inline-block"></div>  
+	<div id="err4" style="width:600px;height:250px;display: inline-block"></div>
+</div>
+
+<h2>Problem 2: </h2>
+
+<div id = "sysPlot" style = "width:1000px;height:500px;">Time step: 1/100000</div>
+<p>Time step of 1/499 (left) vs Time step of 1/501 (right). We can see a total loss of stability with deltaT>1/499.<br>
+1/500 = 2/lambda is the stability boundary we talked about in class. To get accurate results, much smaller time steps are required(smaller than 1/100000)</p>
+<div style = "width:1500px;height:250px;"> 
+	<div id="divergence1" style="width:600px;height:250px;display: inline-block"></div>  
+	<div id="stable1" style="width:600px;height:250px;display: inline-block"></div>
+</div>
+<div id = "impsysPlot" style = "width:1000px;height:500px;">Implicit scheme with Time step: 1/100000</div>
+<p>Time step of 1/499 (left) vs time step of 1/2 (right) with an implicit scheme. The implicit scheme<br>
+doesn't elicit the same stability problems the explicit method did. We can get away with much larger time steps.</p>
+<div style = "width:1500px;height:250px;"> 
+	<div id="impstable1" style="width:600px;height:250px;display: inline-block"></div>  
+	<div id="impstable2" style="width:600px;height:250px;display: inline-block"></div>
+</div>
+
+<script>
+var layout = {
+ 
+  yaxis: {
+    type: 'log',
+    autorange: true
+  }
+};
+////////////////////////////////////////////////////////
+function exEuler(deltaT, initCond, BoundCond){
+
+	
+	var tn = [0];
+	var xn = [initCond];
+	var err=[0];
+	var x = initCond;
+	var t=0;
+ 
+	while (t<BoundCond) {
+
+		x += deltaT*f(t, x)
+		t += deltaT;
+		xn.push(x);
+		tn.push(t);
+		err.push(Math.abs(Math.exp((1/2)*t) - x));
+	}
+	console.log(tn);
+	console.log(xn);
+	
+	return {
+	tn: tn, 
+	xn: xn,
+	err: err
+	};
+
+
+}
+///////////////////////////////////////////////////////////
+function impEuler(deltaT, initCond, BoundCond){
+
+	
+	var tn = [0];
+	var xn = [initCond];
+	var x = initCond;
+	var t=0;
+
+	
+	while (t<BoundCond) {
+//this is linear so xn+1 - hf(tn+1, xn+1) = xn ---> xn+1 - deltaT * 1/2(xn+1) = xn
+//xn+1 = xn/(1-(1/2)*deltaT)   we don't need newton's method for this case
+		x = x/(1-(1/2)*deltaT)
+		t += deltaT;
+		xn.push(x);
+		tn.push(t);
+	}
+ 
+	console.log(tn);
+	console.log(xn);
+	
+	return {
+	tn: tn, 
+	xn: xn
+	};
+
+}
+//////////////////////////////////////////////////////////////
+function crank(deltaT, initCond, BoundCond){
+
+	var tn = [0];
+	var xn = [initCond];
+	var x = initCond;
+	var t=0;
+
+	while (t<BoundCond) {
+//again, solving for x(n+1) yields x(n+1) = xn*(1+deltaT/4)/(1-deltaT/4)
+		x = x*[(1+deltaT/4)/(1-deltaT/4)];
+		t += deltaT;
+		xn.push(x);
+		tn.push(t);
+	}
+ 
+	console.log(tn);
+	console.log(xn);
+	
+	return {
+	tn: tn, 
+	xn: xn
+	};
+
+
+}
+//////////////////////////////////////////////////////////////
+function bdf2(deltaT, initCond, BoundCond){
+	
+	var tn = [0];
+	//bootstrap off crank-nic for first value
+	var xn = [initCond, crank(deltaT, initCond, BoundCond).xn[1]];
+	var x = initCond;
+	var t=0;
+	var n=2;
+
+	while (t<BoundCond) {
+//
+		x = (4*xn[n-1] - xn[n-2])/(3-deltaT);
+		t += deltaT;
+		xn.push(x);
+		tn.push(t);
+		n++;
+	}
+ 
+	console.log(tn);
+	console.log(xn);
+	xn.pop();
+	
+	return {
+	tn: tn, 
+	xn: xn
+	};
+
+}
+////////////////////////////////////////////////////////////
+function eulerSystem(deltaT, initCond, BoundCond){
+
+	var tn = [0];
+	var x1 = [initCond];
+	var x2 = [initCond];
+	//for implicit euler
+	var y1 = [initCond];
+	var y2 = [initCond];
+	
+	//var x = initCond;
+	//var y = initCond;
+	var t=0;
+ 
+
+	while (t<BoundCond) {
+
+		//x += deltaT*x1p(x, y)
+		//y += deltaT*x2p(x, y);
+		t = t + deltaT;
+		
+		x1.push(x1[x1.length-1]  +  deltaT*x1p(x1[x1.length-1], x2[x2.length-1]));
+		x2.push(x2[x2.length-1]  +  deltaT*x2p(x1[x1.length-1], x2[x2.length-1]));
+		
+		//solving for backwards euler
+		y1.push(y1[y1.length-1]/(1+1000*deltaT));
+		y2.push(  (y2[y2.length-1] + 1000*deltaT*y1[y1.length-1])/(1+deltaT)  );
+		tn.push(t);
+	}
+ 
+	console.log(x1);
+	console.log(x2);
+	
+	return {
+	tn: tn, 
+	x1: x1,
+	x2: x2,
+	y1: y1,
+	y2: y2
+	};
+
+
+}
+////////////////////////////////////////////////////////////
+function f(t, x){return (1/2)*x}
+//system
+function x1p(x1, x2) {return -1000*x1}
+function x2p(x1, x2) {return -x2 + 1000*x1}
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////main
+	var e1=[];
+	var e2=[];
+	var e3=[];
+	var e4=[];
+	var meshSize = ["1", '1/2', '1/4', '1/8', '1/16', '1/32'];
+
+for (var n = 1; n<=32; n*=2){
+	var deltaT = 1/n;
+	
+	//var i = exEuler(deltaT, 1, 4).xn;
+	//err1.push(Math.abs(Math.exp((1/2)*t) - exEuler(deltaT, 1, 4).xn));
+	var xplot = exEuler(deltaT, 1, 4).tn;
+	var yplot = exEuler(deltaT, 1, 4).xn;
+	//var xplot = eulerSystem(deltaT, 1, 2).tn;
+	//var yplot = eulerSystem(deltaT, 1, 2).y2;
+	var solution = [];
+
+	for(var t=0; t<=4; t+=deltaT)
+		solution.push(Math.exp((1/2)*t));
+	
+	e1.push(Math.abs(Math.exp((1/2)*4) - exEuler(deltaT, 1, 4).xn.pop()));
+	e2.push(Math.abs(Math.exp((1/2)*4) - impEuler(deltaT, 1, 4).xn.pop()));
+	e3.push(Math.abs(Math.exp((1/2)*4) - crank(deltaT, 1, 4).xn.pop()));
+	e4.push(Math.abs(Math.exp((1/2)*4) - bdf2(deltaT, 1, 4).xn.pop()));
+
+Plotly.plot( plot1, [{
+	x: xplot,
+	y: yplot }], {
+	margin: { t: 0 } } );
+
+Plotly.plot( plot2, [{
+	x: impEuler(deltaT, 1, 4).tn,
+	y: impEuler(deltaT, 1, 4).xn }], {
+	margin: { t: 0 } } );
+	
+Plotly.plot( plot3, [{
+	x: crank(deltaT, 1, 4).tn,
+	y: crank(deltaT, 1, 4).xn }], {
+	margin: { t: 0 } } );	
+	
+Plotly.plot( plot4, [{
+	x: bdf2(deltaT, 1, 4).tn,
+	y: bdf2(deltaT, 1, 4).xn }], {
+	margin: { t: 0 } } );
+	
+
+
+}
+////////////////////error plots
+Plotly.plot( err1, [{
+	x: meshSize,
+	y: e1 }], {
+	margin: { t: 0 } } );
+	
+Plotly.plot( err2, [{
+	x: meshSize,
+	y: e2 }],{
+	margin: { t: 0 } } );
+	
+Plotly.plot( err3, [{
+	x: meshSize,
+	y: e3 }],{
+	margin: { t: 0 } } );
+	
+Plotly.plot( err4, [{
+	x: meshSize,
+	y: e4 }],{
+	margin: { t: 0 } } );
+
+/////////////////////////////explicit system
+Plotly.plot( sysPlot, [{
+	x: eulerSystem(1/100000, 1, 2).tn,
+	y: eulerSystem(1/100000, 1, 2).x1 }],{
+	margin: { t: 0 } } );
+	
+Plotly.plot( sysPlot, [{
+	x: eulerSystem(1/100000, 1, 2).tn,
+	y: eulerSystem(1/100000, 1, 2).x2 }],{
+	margin: { t: 0 } } );
+
+Plotly.plot( divergence1, [{
+	x: eulerSystem(1/499, 1, 2).tn,
+	y: eulerSystem(1/499, 1, 2).x2 }],{
+	margin: { t: 0 } } );
+	
+Plotly.plot( stable1, [{
+	x: eulerSystem(1/501, 1, 2).tn,
+	y: eulerSystem(1/501, 1, 2).x2 }],{
+	margin: { t: 0 } } );
+///////implicit plots
+Plotly.plot( impsysPlot, [{
+	x: eulerSystem(1/100000, 1, 2).tn,
+	y: eulerSystem(1/100000, 1, 2).y1 }],{
+	margin: { t: 0 } } );
+
+Plotly.plot( impsysPlot, [{
+	x: eulerSystem(1/100000, 1, 2).tn,
+	y: eulerSystem(1/100000, 1, 2).y2 }],{
+	margin: { t: 0 } } );	
+	
+Plotly.plot( impstable1, [{
+	x: eulerSystem(1/499, 1, 2).tn,
+	y: eulerSystem(1/499, 1, 2).y2 }],{
+	margin: { t: 0 } } );
+	
+Plotly.plot( impstable2, [{
+	x: eulerSystem(1/2, 1, 2).tn,
+	y: eulerSystem(1/2, 1, 2).y2 }],{
+	margin: { t: 0 } } );
+////oh my god plot more things
+	
+
+
+
+
+
+
+
+
+</script>
