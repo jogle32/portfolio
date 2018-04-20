@@ -1,0 +1,168 @@
+ <head>
+               <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+			   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.2/math.js" type="text/javascript"></script>
+</head>
+<div style = 'height:100px;'>Distance after 800 seconds vs 36000 seconds:</div>
+<div style = "width:1500px;height:250px;"> 
+	<div id="tearly" style="width:600px;height:250px;display: inline-block"></div>  
+	<div id="tlate" style="width:600px;height:250px;display: inline-block"></div>
+</div>
+<div id="error" style="width:600px;height:250px;display: inline-block"></div>  
+
+<script>
+
+function f1(x1, x2, t) {return x2}
+function f2(x1, x2, t) {return 12/mass(t) - 6371000*6371000*(10/(x1*x1))  }
+function f3(x1, x2, t) {return -6371000*6371000*10/(x1*x1) }
+function mass(t) {return 1 - 0.9*t/600}
+/////////////////////////////////////////////////////////////////////////explicit euler
+function rocketSystem(deltaT, BoundCond){
+
+	var tn = [0];
+	var x1 = [6371000];
+	var x2 = [0];
+
+	var t=0;
+
+	while (t<BoundCond) {
+		while (t<600){
+		
+		t = t + deltaT;
+		x1.push(x1[x1.length-1]  +  deltaT*f1(x1[x1.length-1], x2[x2.length-1], t)); //deltaT*f(x1, x2)
+		x2.push(x2[x2.length-1]  +  deltaT*f2(x1[x1.length-1], x2[x2.length-1], t));
+		tn.push(t);
+		
+		
+	}
+ 
+		t = t + deltaT;
+		
+		x1.push(x1[x1.length-1]  +  deltaT*f1(x1[x1.length-1], x2[x2.length-1], t));
+		x2.push(x2[x2.length-1]  +  deltaT*f3(x1[x1.length-1], x2[x2.length-1], t));
+		tn.push(t);
+ 
+ 
+ 
+ }
+ 
+
+	return {
+	tn: tn, 
+	x1: x1,
+	x2: x2,
+	};
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////rk4
+function rk4(deltaT, BoundCond){
+
+	var tn = [0];
+	var x1array = [6371000];
+	var x2array = [0];
+
+	var t=0;
+	//f is for x2
+	var F1
+	var F2
+	var F3
+	var F4
+	//k is for x1 
+	var K1
+	var K2
+	var K3
+	var K4
+	
+	
+	while (t<600){
+		
+		t = t+deltaT; 
+		tn.push(t);
+		x1=x1array[x1array.length-1];
+		x2=x2array[x2array.length-1];
+		
+	/*	K1 = f1(x1, x2, t);
+		K2 = f1(x1, x2+deltaT*K1/2, t);
+		K3 = f1(x1, x2+deltaT*K2/2, t);
+		K4 = f1(x1, x2+deltaT*K3, t);*/
+		K1 = x2;
+		K2 = x2+deltaT*K1/2;
+		K3 = x2+deltaT*K2/2;
+		K4 = x2+deltaT*K3;
+		
+		x1array.push(x1 + (deltaT/6)*(K1 + 2*K2 + 2*K3 + K4));
+		
+		
+		F1 = f2(x1, x2, t);
+		F2 = f2(x1 + deltaT*F1/2, x2 + deltaT*F1/2, t + deltaT/2);
+		F3 = f2(x1 + deltaT*F2/2, x2 + deltaT*F2/2, t + deltaT/2);
+		F4 = f2(x1 + deltaT*F3, x2 + deltaT*F3, t + deltaT);
+		
+		x2array.push(x2 + (deltaT/6)*(F1 + 2*F2 + 2*F3 + F4));
+		
+	}
+	while (t<BoundCond) {
+		t = t+deltaT;
+		tn.push(t);
+		x1=x1array[x1array.length-1];
+		x2=x2array[x2array.length-1];
+		
+		K1 = f1(x1, x2, t);
+		K2 = f1(x1, x2+deltaT*K1/2, t);
+		K3 = f1(x1, x2+deltaT*K2/2, t);
+		K4 = f1(x1, x2+deltaT*K3, t);
+		
+		x1array.push(x1 + (deltaT/6)*(K1 + 2*K2 + 2*K3 + K4));
+		
+		F1 = f3(x1, x2, t);
+		F2 = f3(x1 + deltaT*F1/2, x2 + deltaT*F1/2, t + deltaT/2);
+		F3 = f3(x1 + deltaT*F2/2, x2 + deltaT*F2/2, t + deltaT/2);
+		F4 = f3(x1 + deltaT*F3, x2 + deltaT*F3, t + deltaT);
+		
+		x2array.push(x2 + (deltaT/6)*(F1 + 2*F2 + 2*F3 + F4));
+ 
+ 
+ }
+ 
+
+	return {
+	tn: tn, 
+	x1: x1array,
+	x2: x2array,
+	};
+
+}
+////////////////////////////////////////////////////////////////////////////////////main
+console.log(rocketSystem(1/100, 36000).x1.pop());
+console.log(rk4(1/100, 36000).x1.pop());
+
+var estimate = rk4(1/500, 36000).x1.pop()
+var err=[];
+var N=[];
+
+for (var n=50; n<=500; n+=50){
+
+	err.push( math.abs(rk4(1/n, 36000).x1.pop() - estimate) );
+	N.push(n);
+}
+
+Plotly.plot( tearly, [{
+	x: rk4(1/100, 800).tn,
+	y: rk4(1/100, 800).x1 }],{
+	margin: { t: 0 } } );
+
+Plotly.plot( tlate, [{
+	x: rk4(1/100, 36000).tn,
+	y: rk4(1/100, 36000).x1 }],{
+	margin: { t: 0 } } );
+
+Plotly.plot( error, [{
+	x: N,
+	y: err }],{
+	margin: { t: 0 } } );
+	
+	
+	
+	console.log(err);
+	
+	
+	</script>
