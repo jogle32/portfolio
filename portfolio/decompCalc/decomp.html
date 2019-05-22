@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<head>
+<!-- current version of mathjs is super slow for some reason -->
+ <!-- removed tensorflow, qr doesn't pivot -->
+		 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.2/math.min.js" type="text/javascript"></script>
+		 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+	   <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT|Open+Sans|Lato" rel="stylesheet">
+       <link rel="stylesheet" href="style.css">
+			   
+	   <meta charset="UTF-8">
+	   <meta name="Jon Ogle" content="Decomp">
+	   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+	   <title>Decomposition Calculator</title>
+
+
+</head>
+
+<header>
+
+</header>
+<body>
+    
+<div class="instructions-toggle-wrapper">Instructions <input type="checkbox" name="instructions" value="instructions" class="instructions-toggle" checked></div>
+
+	<section class="main-container">
+		
+		<div class="instructions">
+				
+			 <div class="intro">
+				<p>Welcome! This matrix calculator factors real matrices A&#8714; &#8477;<sup>nxn</sup> into several decompositions as well as
+					computes some common properties such as the eigenvalues, inverse, and determinant. Please note that the 3 decompositions are generally not unique 
+					unless under certain circumstances.
+				</p>
+				<p>Input: Individual elements must be separated by commas, and rows must be contained in brackets separated by commas (whitespace is ignored). Example 
+				   input is shown in the input field. Arithmetic expressions are valid, as are trigonometric functions, exponents, logs, and constants such as "pi"and "e". 
+				</p>
+				 <p>Choose an option and the desired precision from the dropdown below.</p>
+			</div>
+
+				<div class="decomp-info"></div>
+		</div>
+
+	<div class="matrix-input">
+  <textarea id="A" type="text"> 
+  [
+  [1, 0, 2, 3],
+  [6, 2, 6, 1],
+  [0, 0, 1, 2],
+  [1, 2, 3, 4]
+		]</textarea>
+	</div>
+
+	</section>
+	
+	<div class="dropdown-wrapper">
+		<div class="custom-select">
+			<select>
+				<option value="0">Select:</option>
+				<option value="1">LU Decomposition</option>
+				<option value="2">Schur Decomposition</option>
+				<option value="3">QR Decomposition</option>
+				<option value="4">Inverse Matrix</option>
+				<option value="5">Eigenvalues</option>
+				<option value="6">Determinant</option>
+				
+			</select>
+		</div>
+	
+		<div class="custom-select">
+			<select>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="">Max</option>
+				
+				
+			</select>
+		</div>
+
+		</div>
+			 
+<div class="btn-container">
+		<div id="submit">Submit</div>
+</div>
+
+<div class="mat-container"></div>
+
+<script src="main.js"></script>
+
+</body>
+</html>

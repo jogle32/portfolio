@@ -1,0 +1,191 @@
+
+body {
+    
+    background-image: linear-gradient(to bottom , rgba(240, 151, 63, 0.1), rgba(255, 255, 255, .75)), 
+    url('textures/qbkls/qbkls/qbkls.png');	/* Background pattern from Toptal Subtle Patterns */
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+}
+
+a, a:visited{
+    text-decoration: none;
+    color: steelblue;
+    cursor: pointer;
+}
+a:hover{
+    color: lightseagreen;
+}
+/* ///////////////////////////////// */
+
+.intro{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* containers////////////////////////////////////////////////////////containers */
+.matrix {
+    display: inline-block;
+    padding: 10px;
+    font-size: 1.25rem;
+}
+.instructions-toggle-wrapper{
+    display: inline-block;
+    font-family: 'Old Standard TT';
+    font-size: 1rem;
+    padding: .5rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+}
+
+.instructions{
+    box-sizing: border-box;
+    width: 50vw;
+    padding: 1rem;
+    text-align: center;
+    font-family: 'Old Standard TT';
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+
+    transition: all .5s;
+    opacity: 1;
+}
+
+
+.hide-instructions{
+    margin-left: -50vw;
+    opacity: 0;
+    z-index: -1;    /* so you can't drag the text */
+}
+
+.main-container{
+    margin: 5vh 0;
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: center;
+
+}
+
+.matrix-input{
+    margin: 5vh 5vw;
+    width: 500px;
+    height: 350px;
+    text-align: center;
+}
+
+.mat-container{
+    margin-top: 10vh;
+    padding: 5vh 0;
+    border-top: 2px double black;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 50vh;
+    min-width: 100%;
+}
+
+.dropdown-wrapper{
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.btn-container{
+    width: 100%;
+    text-align: center;
+}
+
+textarea{
+
+    width: inherit;
+    height: inherit;
+    resize: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+}
+
+/* button submit/////////////////////////////////////////////////////btn */
+
+#submit, #submit:link, #submit:visited{
+
+    display: inline-block;
+    width: 15rem;
+    margin: 0 auto;
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-family: "Lato";
+    background-color: steelblue;
+    color: white;
+    cursor: pointer;
+
+    transition: all .1s;
+}
+
+#submit:hover{
+    color: white;
+    background-color: lightcoral;
+}
+
+#submit:active{
+    background-color: rgb(230, 87, 87);
+    transform: translateY(1px);
+}
+
+/* /////////////////////////////////////////DROPDOWN//////////////////////////// */
+
+.custom-select{
+    position: relative;
+    display: inline-block;
+}
+
+.custom-select select{
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 1px 2px black;
+    padding: .5rem 2rem .5rem .5rem;
+    border-radius: 5px;
+    
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+}
+.custom-select option{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.custom-select::after{
+    display: block;
+    content: '\25BC';
+    position: absolute;
+    top: calc(50% - .5em);
+    right: 6px;
+    z-index: -1;
+}
+
+.custom-select:hover{
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.custom-select:hover.custom-select::after{
+    transform: rotate(90deg);
+    transition: all .2s;
+
+    backface-visibility: hidden;
+}
+/* ///////////MEDIA QUERIES///////////////////////////////////////////////////MEDIA QUERIES */
+@media screen and (max-width: 600px) {
+.matrix-input{
+    width: 90vw;
+    height: 40vh;
+}
+
+.instructions{
+    width: 90vw;
+}
+
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
