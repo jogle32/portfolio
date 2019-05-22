@@ -1,0 +1,384 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////reset
+/////////////////////////////////////////////////////////////////////////////////////////////////////*/
+body,
+html {
+	
+  font-size: 16px;
+	  /* font-family: 'EB Garamond', serif; */
+	  /* font-family: 'Libre Baskerville', serif; */
+
+
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+  /* font-family: 'Montserrat', sans-serif; */
+
+  /* font-family: 'Lato', sans-serif; */
+
+  /* font-family: 'Open Sans', sans-serif; */
+
+  /* font-family: 'Roboto', sans-serif; */
+
+  /* font-family: 'Roboto Slab', serif; */
+	/* overflow: hidden; */
+
+}
+
+/* ///////////////////////////////////////particles */
+.background{
+	position: absolute;
+	display: block;
+	top: 0;
+ 	bottom: 0;
+ 	left: 0;
+  right: 0;
+	z-index: 0;
+}
+/* ////////////////////////////////NAVBAR///////////////////////////////// */
+.main-nav-bar{
+	
+	min-width: 20rem;
+	background-color: black;
+	background: linear-gradient(to left, black, transparent 45%);
+	display: flex;
+	justify-content: flex-end;
+
+}
+
+.main-nav-bar ul{
+	display: flex;
+	justify-content: right;
+}
+
+.main-nav-bar a{
+
+	display: block;
+	padding: 20px;
+	text-decoration: none;
+	color: white;
+	transition: all .2s;
+	
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+	
+}
+
+.main-nav-bar a:hover{
+	background-color: rgba(128, 128, 128, 0.25);
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .9);
+	border-radius: 1px;
+}
+
+
+/* ////////////////////////////////////////////////HOME//////////////////////////////////////////////////// */
+
+.intro-background{
+	height: 100vh;
+	/* rgba(90, 14, 77, 0.6) hot pink/purple */
+	/* background-image:  linear-gradient(to right bottom, rgba(14, 52, 90, 0.8), rgba(90, 14, 77, 0.6)), url("images/background.jpgjjj"); */
+	/* background-repeat: no-repeat; */
+	background-position: center;
+	/* background-size: cover; */
+	/* background-image:  linear-gradient(to right bottom, rgba(14, 52, 90, .5), rgba(90, 14, 77, .6)); */
+	background-image:  linear-gradient(to right bottom, rgb(7, 32, 58), rgb(0, 0, 0));
+
+	/* rgba(90, 14, 77, 0.6)   for a little more hot pink/80s retro*/
+	
+	
+}
+/* ///////////////////////////////////////////////////////////////////INTRO */
+.intro{
+	
+	text-align: center;
+	padding-top: 50vh;
+	max-width: 50%;
+	margin: 0 auto;
+
+}
+
+
+.intro h1{
+
+	color: rgb(255, 255, 255);
+	font-size: 2em;
+	line-height: 2em;
+	backface-visibility: hidden;
+
+}
+
+.intro p{
+
+	font-family: 'Open Sans', sans-serif;
+
+	color: rgba(255, 255, 255, .618);
+	font-size: 1em;
+	max-width: 50%;
+	margin: 0 auto;
+	backface-visibility: hidden;
+}
+
+.fade-in-1{
+	animation: fade 2s;
+	
+}
+
+.fade-in-2{
+	animation: fade 2s cubic-bezier(.15, -.13, 1, -.5);
+	
+}
+
+.fade-in-3{
+	animation: fade 3s cubic-bezier(.15, -.13, 1, -.5);
+}
+/* ////////////////////////////////////////////////////////////////////////////////////////ABOUT */
+
+.black-border{
+	background-color: rgba(0, 0, 0, 0.8);
+	box-shadow: 0 0 1rem black;
+	padding: 1rem 1rem;
+	color: white;
+	text-align: center;
+	letter-spacing: .25rem; 
+
+}
+
+.info-container::before{
+	content: ' ';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+		
+		background: url('images/boring_computer.jpg') no-repeat center center; 
+		background-size: cover;
+		will-change: transform;
+		z-index: -1;		
+}
+
+.info-container{
+	overflow: hidden;
+	position: relative; 
+}
+
+.about{
+	font-family: 'Lato', sans-serif;
+	min-height: 75vh;
+	background-image:  linear-gradient(to right bottom, rgba(14, 52, 90, 0.5), rgba(90, 14, 77, 0.6));
+
+}
+
+.about p{
+	font-size: 1rem;
+	letter-spacing: .25rem;
+}
+
+.bubble{
+
+	display: block;
+	text-align: center;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.5);
+  font-size: 1.5rem;
+	border-radius: 30px;
+	border: 1px solid rgba(255, 217, 0, .5);
+	padding: 1.5rem;
+	margin: 1rem;
+	backface-visibility: hidden;
+
+	animation: enterleft 1s cubic-bezier(0.19, 1, 0.22, 1);
+	
+}
+
+
+/* .bubble:hover{
+	transition: all .2s;
+	transform: rotateZ(5deg);
+	backface-visibility: hidden;
+	
+} */
+
+	
+.bubble ul{
+	text-align: center;
+	min-width: 12.5rem;
+	padding: 2rem 2rem;
+	margin-bottom: .5rem;
+	border-bottom: solid gray;
+}
+
+.learning{
+	margin-top: 1rem;
+	font-size: .8em;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////PROJECTS */
+.projects{
+	min-height: 75vh;
+	background-image: linear-gradient(to bottom, rgba(90, 14, 77, .6), rgba(0, 0, 0, 1));
+}
+
+.project-img{
+
+	display: inline-block;
+	opacity: .7;
+	width: 50vh;
+	border-radius: 10px;
+	transition: all .25s;
+	box-shadow: 0 0 10px black;
+	
+}
+.project-img:hover{
+	transform: scale(1.1);
+	opacity: 1;
+}
+.projects a{
+	display: inline-block;
+	background-color: black;
+	border-radius: 10px;
+	margin: 1rem;
+}
+/* /////////////////////////////////////////////////////////////////////////////////////CONTACT */
+.contact{
+	color: rgb(200, 200, 200);
+	height: 75vh;
+	background-color: black;
+}
+
+.thanks{
+	text-align: center;
+	font-size: 1.5rem;
+	padding: .75rem;
+	border-bottom: 1px solid gray;
+}
+.thanks h2{
+	font-size: 1rem;
+	padding-top: .5rem;
+}
+.contact-info{
+	
+	padding: 1rem;
+	text-align: center;
+}
+
+.contact li{
+	padding: .25rem;
+}
+.contact a, .contact a:visited{
+	
+	text-decoration: none;
+	color: white;
+}
+
+.cv-btn{
+	display: block;
+	padding: 1rem 2rem;
+	background-color: steelblue;
+	text-align: center;
+	border-radius: 50px;
+	margin-top: 1rem;
+}
+
+.cv-btn:hover{
+	background-color: rgb(38, 100, 151);
+}
+
+/* UTILS////////////////////////////////////////////////////////////////////UTILS */
+.flex{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	align-content: center;
+}
+
+.sticky{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+
+transform: translateZ(0);
+-webkit-transform: translateZ(0);	
+/* will-change: transform; doesn't work for edge*/
+}
+
+/* MEDIA QUERIES ///////////////////////////////////////////////////////////MEDIA QUERIES*/
+
+@media screen and (max-width: 600px){
+
+	html, body{
+		
+		font-size: 12px;
+	}
+
+
+}
+
+/* ANIMATIONS///////////////////////////////////////////////////////////////////ANIMATIONS */
+
+@keyframes enterleft{
+	0%{
+			transform: translateX(200vw);
+	}
+	80%{
+		transform: translateX(-5rem);
+	}
+	100%{
+		transform: translateX(0);
+	}
+}
+
+@keyframes fade{
+	0%{
+		opacity: 0;
+		
+	}
+
+	100%{
+		opacity:1;
+	}
+}
+/* /////////////////////////////////////////////////////////////////////////////// */

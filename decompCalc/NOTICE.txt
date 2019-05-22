@@ -1,0 +1,9 @@
+﻿Thanks to:    
+
+    Project: MathJax https://github.com/mathjax/MathJax
+    © Copyright 2018 The MathJax Consortium Revision 9d711f40.
+    License: Apache-2.0
+
+    Project: Mathjs  https://github.com/josdejong/mathjs
+    Copyright (C) 2013-2019 Jos de Jong wjosdejong@gmail.com
+    License: Apache-2.0
