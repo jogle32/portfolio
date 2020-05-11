@@ -227,13 +227,14 @@ math.config({
       const matContainer = document.querySelector('.mat-container');
       matContainer.insertAdjacentHTML('afterbegin', `<div class = 'matrix' id='eigvals'></div>`);
       
+    if(A.length===2){
+        eigenvalues = eigenvalsFor2x2(A); //degenerate case
+    }
+
     try {
         if(A.length>2){
           eigenvalues = getEigvals(A);
-  
-      }else if(A.length===2){
-          eigenvalues = eigenvalsFor2x2(A);
-      }
+      } 
     } catch (error) {
         alert('Sorry, due to the nature of the householder reflections used, the QR algorithm failed.');
         return;
@@ -663,12 +664,13 @@ var t = math.sqrt(discriminant);  //quadratic formula
 if(discriminant<0){
     values.push( `(${trace} + ${t.re} + i*${t.im})/2`);
     values.push( `(${trace} - ${t.re} - i*${t.im})/2`);     //build string for complex eval
-} else{
-    values.push(`(${trace} + ${t})/2`);  //real eval
-    values.push(`(${trace} - ${t})/2`);
-}	
+    return math.eval(values);
 
-return math.eval(values);
+} else{
+    values.push( (trace + t)/2);  //real eval
+    values.push( (trace - t)/2);
+    return values;
+}
 
 }
 ////////////////////////////////////////////////////////////////
