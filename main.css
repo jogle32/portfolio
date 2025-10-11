@@ -96,7 +96,7 @@ html {
 .main-nav-bar a{
 
 	display: block;
-	padding: 20px;
+	padding: 10px 16px 10px 16px;
 	text-decoration: none;
 	color: white;
 	transition: all .2s;
@@ -107,7 +107,9 @@ html {
 }
 
 .main-nav-bar a:hover{
-	background-color: rgba(128, 128, 128, 0.25);
+	/* background-color: rgba(128, 128, 128, 0.25); */
+	background-color: white;
+	color: black;
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .9);
 	border-radius: 1px;
 }
