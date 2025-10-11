@@ -173,6 +173,11 @@ html {
 .fade-in-3{
 	animation: fade 3s cubic-bezier(.15, -.13, 1, -.5);
 }
+
+.fade-in-3 span{
+	text-decoration: line-through;
+	text-decoration-style: 5px;
+}
 /* ////////////////////////////////////////////////////////////////////////////////////////ABOUT */
 
 .black-border{
