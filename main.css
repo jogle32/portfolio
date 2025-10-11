@@ -176,9 +176,30 @@ html {
 	animation: fade 3s cubic-bezier(.15, -.13, 1, -.5);
 }
 
-.fade-in-3 span{
-	text-decoration: line-through;
-	text-decoration-thickness: 5px;
+
+.diagonal-strike {
+	position: relative;
+	display: inline-block;
+}
+
+.diagonal-strike::after,
+.diagonal-strike::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background: white;
+	transform-origin: center;
+}
+
+.diagonal-strike::after {
+	transform: rotate(-15deg);
+}
+
+.diagonal-strike::before {
+	transform: rotate(15deg);
 }
 /* ////////////////////////////////////////////////////////////////////////////////////////ABOUT */
 
