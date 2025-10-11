@@ -176,7 +176,7 @@ html {
 
 .fade-in-3 span{
 	text-decoration: line-through;
-	text-decoration-style: 5px;
+	text-decoration-thickness: 5px;
 }
 /* ////////////////////////////////////////////////////////////////////////////////////////ABOUT */
 
