@@ -41,7 +41,7 @@ let contact = document.querySelector('.contact-btn');
 
 let scrollOptions = { 
         behavior: 'smooth',
-        block: 'center'
+        block: 'start'
       };
 
 about.addEventListener('click', (e)=>{
