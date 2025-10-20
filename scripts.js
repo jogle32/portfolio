@@ -50,7 +50,7 @@ about.addEventListener('click', (e)=>{
 });
 
 projects.addEventListener('click', (e)=>{
-    document.querySelector('.projects').scrollIntoView(scrollOptions)
+    document.querySelector('.about-blurb').scrollIntoView(scrollOptions)
 });
 
 contact.addEventListener('click', (e)=>{
