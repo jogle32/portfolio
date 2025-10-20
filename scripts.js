@@ -46,7 +46,7 @@ let scrollOptions = {
       };
 
 about.addEventListener('click', (e)=>{
-  document.querySelector('#gallery').scrollIntoView(scrollOptions)
+  document.querySelector('.gallery-blurb').scrollIntoView(scrollOptions)
 });
 
 projects.addEventListener('click', (e)=>{
