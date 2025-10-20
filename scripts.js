@@ -55,3 +55,24 @@ projects.addEventListener('click', (e)=>{
 contact.addEventListener('click', (e)=>{
     document.querySelector('.contact').scrollIntoView(scrollOptions) 
 });
+
+
+//////////////////////////////////////////////////////
+// POPULATE GALLERY //
+///////////////////////////////////////////////////////
+fetch('imageGallery.json')
+  .then(response => {
+    if (!response.ok) throw new Error('Failed to load JSON');
+    return response.json();
+  })
+  .then(imageGallery => {
+    const galleryDiv = document.getElementById('gallery');
+    imageGallery.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = "Gallery Image";
+      img.style = "max-width: 200px; margin: 5px;";
+      galleryDiv.appendChild(img);
+    });
+  })
+  .catch(error => console.error('Error loading image gallery:', error));
