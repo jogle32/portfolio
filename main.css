@@ -499,9 +499,13 @@ transform: translateZ(0);
 
 	html, body{
 		
-		font-size: 12px;
+		font-size: 14px;
 	}
 
+	#gallery {
+        gap: 10px;
+        padding: 10px;
+      }
 
 }
 
