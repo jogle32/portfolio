@@ -307,14 +307,15 @@ html {
 	font-family: 'Lato', sans-serif;
 	min-height: 100vh;
 	background-color: white;
-	background-image:  linear-gradient(to right bottom, rgba(14, 52, 90, 0.5), rgba(90, 14, 77, 0.6));
-	background-image:  linear-gradient(to right bottom, rgba(14, 52, 90, 0.2), rgba(90, 14, 77, 0.2));
+	/* background-image:  linear-gradient(to right bottom, rgba(14, 52, 90, 0.5), rgba(90, 14, 77, 0.6)); */
+	/* background-image:  linear-gradient(to right bottom, rgba(14, 52, 90, 0.2), rgba(90, 14, 77, 0.2)); */
 }
 
 .about p{
 	font-size: 1rem;
 	letter-spacing: .25rem;
 	padding: 1rem;
+	line-height: 1.4;
 }
 
 .bubble{
