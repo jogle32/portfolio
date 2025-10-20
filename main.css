@@ -457,11 +457,13 @@ html {
 
 .cv-btn{
 	display: block;
+	width: 200px;
 	padding: 1rem 2rem;
 	background-color: steelblue;
 	text-align: center;
 	border-radius: 50px;
 	margin-top: 1rem;
+	margin: 0 auto;
 }
 
 .cv-btn:hover{
