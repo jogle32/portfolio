@@ -89,7 +89,7 @@ html {
 .main-nav-bar{
 	min-width: 20rem;
 	background-color: black;
-	background: linear-gradient(to left, black, transparent 45%);
+	background: linear-gradient(to left, black, black, transparent 35%);
 	display: flex;
 	justify-content: flex-end;
 }
@@ -245,7 +245,6 @@ html {
 	left: 10%;
 	width: 80%;
 	height: 1px;
-	/* background: black; */
 	background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.2), rgba(0,0,0,1), rgba(0,0,0,0.2));
 	transform-origin: center;
 }
@@ -293,8 +292,7 @@ html {
     top: 0;
     left: 0;
 		
-		/* background: url('images/boring_computer.jpg') no-repeat center center;  */
-		background-color: black;
+		background: url('images/boring_computer.jpg') no-repeat center center; 
 		background-size: cover;
 		will-change: transform;
 		z-index: -1;		
@@ -307,13 +305,16 @@ html {
 
 .about{
 	font-family: 'Lato', sans-serif;
-	min-height: 75vh;
+	min-height: 100vh;
+	background-color: white;
 	background-image:  linear-gradient(to right bottom, rgba(14, 52, 90, 0.5), rgba(90, 14, 77, 0.6));
+	background-image:  linear-gradient(to right bottom, rgba(14, 52, 90, 0.2), rgba(90, 14, 77, 0.2));
 }
 
 .about p{
 	font-size: 1rem;
 	letter-spacing: .25rem;
+	padding: 1rem;
 }
 
 .bubble{
@@ -331,13 +332,6 @@ html {
 	animation: enterleft 1s cubic-bezier(0.19, 1, 0.22, 1);	
 }
 
-/* .bubble:hover{
-	transition: all .2s;
-	transform: rotateZ(5deg);
-	backface-visibility: hidden;
-	
-} */
-
 .bubble ul{
 	text-align: center;
 	min-width: 12.5rem;
@@ -354,7 +348,6 @@ html {
 /*///////////////////////////////////////////////////////////////////////
 // ABOUT ALT//
 ///////////////////////////////////////////////////////////////////////*/
-
 
 
 /*///////////////////////////////////////////////////////////////////////
