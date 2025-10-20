@@ -71,6 +71,7 @@ fetch('imageGallery.json')
       const img = document.createElement('img');
       img.src = src;
       img.alt = "Gallery Image";
+      img.loading = "lazy";
       img.style = "max-width: 200px; margin: 5px;";
       galleryDiv.appendChild(img);
     });
