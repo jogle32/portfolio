@@ -292,7 +292,7 @@ html {
     top: 0;
     left: 0;
 		
-		background: url('images/boring_computer.jpg') no-repeat center center; 
+		/* background: url('images/boring_computer.jpg') no-repeat center center;  */
 		background-size: cover;
 		will-change: transform;
 		z-index: -1;		
@@ -345,24 +345,17 @@ html {
 	font-size: .8em;
 }
 
-/* #gallery{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      box-sizing: border-box;
-    } */
-
 #gallery{
-		display: inline-block;
-		column-count: 4;
-		margin-right: auto;
-		margin-left: auto;
+	display: inline-block;
+	column-count: 4;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 #gallery img{
 	width: 100%;
 	height: auto;
+	margin: 5px;
 	border-radius: 5px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 	/* object-fit: cover; */
